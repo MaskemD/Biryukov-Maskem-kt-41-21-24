@@ -56,16 +56,26 @@ namespace BiryukovMkt_41_21.Controllers
         }
 
         [HttpPost("Edit")]
-        public async Task<IActionResult> EditTeacherAsync(Teacher teacher, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> EditTeacherAsync([FromBody] Teacher teacher, CancellationToken cancellationToken = default)
         {
+            if (teacher == null || teacher.TeacherId <= 0)
+            {
+                return BadRequest("Invalid teacher data");
+            }
+
             await _teacherModifierService.EditTeacherAsync(teacher, cancellationToken);
             return Ok();
         }
 
         [HttpPost("Remove")]
-        public async Task<IActionResult> RemoveTeacherAsync(Teacher teacher, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> RemoveTeacherAsync(int teacherId, CancellationToken cancellationToken = default)
         {
-            await _teacherModifierService.RemoveTeacherAsync(teacher, cancellationToken);
+            if (teacherId <= 0)
+            {
+                return BadRequest("Invalid teacher ID");
+            }
+
+            await _teacherModifierService.RemoveTeacherAsync(teacherId, cancellationToken);
             return Ok();
         }
     }

@@ -5,7 +5,7 @@ namespace BiryukovMkt_41_21.Models
     public class Teacher
     {
         // [JsonIgnore] //при сериализации объекта в JSON этот свойство должно игнорироваться. То есть, оно не будет включено в JSON-представление объекта
-        [JsonIgnore]
+       // [JsonIgnore]
         public int TeacherId { get; set; }
 
         public required string FirstName { get; set; } = string.Empty;
