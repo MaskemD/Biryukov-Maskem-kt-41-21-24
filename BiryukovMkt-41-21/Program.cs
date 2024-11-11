@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using BiryukovMkt_41_21.Database;
 using NLog;
 using NLog.Web;
+using BiryukovMkt_41_21.ServiceExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ try
     builder.Services.AddDbContext<TeacherDbContext>(options =>
          options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+    builder.Services.AddServices(); // Регистрация интерфейсов и их реализаций
 
     var app = builder.Build();
 
